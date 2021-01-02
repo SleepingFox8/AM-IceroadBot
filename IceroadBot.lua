@@ -1,29 +1,34 @@
 --Made By BennyZ, Converted to Lua by Kayla and Infra_ SleepingFox8
-vectoring = not vectoring           
-if not vectoring then 
-    log("&7[&fBots&7] &6* &cVECTORING...")
-    return end
 
-local minfood = 12
+-- initialization
+    -- import dependancies
+        botTools = require ("AM-Tools/botTools")
+        compTools = require ("AM-Tools/compTools")
 
-log("&7[&fBots&7] &6* &aVECTORING...")
-while(vectoring) do
-    player = getPlayer() 
+    -- toggle script off if user requests
+        if compTools.anotherInstanceOfThisScriptIsRunning() then
+            compTools.stopOtherInstancesOfThisScript()
+            log("&7[&fBots&7] &6* &cVECTORING...")
+            botTools.freezeAllMotorFunctions()
+            -- silently end this script
+                return 0
+        end
 
-    -- Snap to nearest 45 degree angle
-    look(math.floor((player.yaw+22.5)/45)*45, 0)
+-- main program
+    --initialize MAIN table
+    --Stores variables for just MAIN function
+        local MAIN = {}
 
-    -- Sprint Jump
-    forward(-1)
-    sprint(true)
-    jump()
-    sleep(50)
-   
-    -- if hungry...eat.
-    if player.hunger <= minfood then
-        use(150)
+    log("&7[&fBots&7] &6* &aVECTORING...")
+    while(true) do 
+        -- Snap to nearest 45 degree angle
+            MAIN.player = getPlayer()
+            look(math.floor((MAIN.player.yaw+22.5)/45)*45, 0)
+        -- Sprint Jump
+            forward(-1)
+            sprint(true)
+            jump()
+            sleep(50)
+        -- eat if hungry
+            botTools.eatIfHungery()
     end
-
-end
-
-forward(1)  -- Stop walking
