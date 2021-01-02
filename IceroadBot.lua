@@ -2,8 +2,8 @@
 
 -- initialization
     -- import dependancies
-        botTools = require ("AM-Tools/botTools")
-        compTools = require ("AM-Tools/compTools")
+        local botTools = require ("AM-Tools/botTools")
+        local compTools = require ("AM-Tools/compTools")
 
     -- toggle script off if user requests
         if compTools.anotherInstanceOfThisScriptIsRunning() then
